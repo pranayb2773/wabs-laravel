@@ -27,6 +27,16 @@ final class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
+    public function isActive(): bool
+    {
+        return $this->status === UserStatus::Active;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRole::Admin;
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -39,6 +49,9 @@ final class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
             'role' => UserRole::class,
             'status' => UserStatus::class,
+            'tos_accepted' => 'boolean',
+            'is_18_plus' => 'boolean',
+            'is_professional_trader' => 'boolean',
         ];
     }
 }
