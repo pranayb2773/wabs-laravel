@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" fill="none">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="flaskGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#d946ef"/>
+    </linearGradient>
+
+    <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#e879f9"/>
+    </linearGradient>
+
+    <linearGradient id="candleGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#e879f9"/>
+    </linearGradient>
+
+    <linearGradient id="bubbleGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Flask outline -->
+  <path
+    d="M36 8 L36 35 L8 85 Q4 96 12 103 L88 103 Q96 96 92 85 L64 35 L64 8"
+    stroke="url(#flaskGradient)"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+    filter="url(#glow)"
+  />
+
+  <!-- Flask neck top -->
+  <path
+    d="M34 8 Q34 5 36 5 L64 5 Q66 5 66 8"
+    stroke="url(#flaskGradient)"
+    stroke-width="3"
+    stroke-linecap="round"
+    fill="none"
+    filter="url(#glow)"
+  />
+
+  <!-- Liquid at bottom -->
+  <path
+    d="M12 88 Q10 96 16 99 L84 99 Q90 96 88 88 Q66 82 50 88 Q34 94 12 88 Z"
+    fill="url(#liquidGradient)"
+    opacity="0.8"
+    filter="url(#softGlow)"
+  />
+
+  <!-- Candlestick charts -->
+  <g filter="url(#softGlow)">
+    <!-- Candle 1 -->
+    <line x1="30" y1="75" x2="30" y2="58" stroke="url(#candleGradient)" stroke-width="1.5"/>
+    <rect x="27" y="62" width="6" height="10" rx="1" fill="url(#candleGradient)"/>
+
+    <!-- Candle 2 -->
+    <line x1="40" y1="78" x2="40" y2="48" stroke="url(#candleGradient)" stroke-width="1.5"/>
+    <rect x="37" y="52" width="6" height="14" rx="1" fill="url(#candleGradient)"/>
+
+    <!-- Candle 3 -->
+    <line x1="50" y1="80" x2="50" y2="42" stroke="url(#candleGradient)" stroke-width="1.5"/>
+    <rect x="47" y="46" width="6" height="18" rx="1" fill="url(#candleGradient)"/>
+
+    <!-- Candle 4 -->
+    <line x1="60" y1="78" x2="60" y2="50" stroke="url(#candleGradient)" stroke-width="1.5"/>
+    <rect x="57" y="54" width="6" height="12" rx="1" fill="url(#candleGradient)"/>
+
+    <!-- Candle 5 -->
+    <line x1="70" y1="75" x2="70" y2="55" stroke="url(#candleGradient)" stroke-width="1.5"/>
+    <rect x="67" y="58" width="6" height="10" rx="1" fill="url(#candleGradient)"/>
+  </g>
+
+  <!-- Bubbles -->
+  <g filter="url(#softGlow)">
+    <circle cx="45" cy="18" r="3" fill="url(#bubbleGradient)" opacity="0.9"/>
+    <circle cx="55" cy="12" r="4" fill="url(#bubbleGradient)" opacity="0.8"/>
+    <circle cx="50" cy="0" r="2.5" fill="url(#bubbleGradient)" opacity="0.7"/>
+    <circle cx="40" cy="6" r="1.5" fill="url(#bubbleGradient)" opacity="0.6"/>
+    <circle cx="58" cy="3" r="2" fill="url(#bubbleGradient)" opacity="0.7"/>
+    <circle cx="62" cy="15" r="5" fill="url(#bubbleGradient)" opacity="0.6"/>
+  </g>
+
+  <!-- Small sparkle dots in liquid -->
+  <circle cx="30" cy="92" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="55" cy="95" r="1.5" fill="#fff" opacity="0.5"/>
+  <circle cx="70" cy="90" r="1" fill="#fff" opacity="0.4"/>
+</svg>
