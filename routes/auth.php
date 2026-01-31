@@ -10,6 +10,9 @@ Route::middleware('guest')->group(function () {
 
     Route::livewire('/forgot-password', 'auth.forgot-password')
         ->name('password.request');
+
+    Route::livewire('/reset-password/{token}', 'auth.reset-password')
+        ->name('password.reset');
 });
 
 Route::middleware('auth')->group(function () {

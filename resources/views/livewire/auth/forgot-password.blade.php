@@ -2,8 +2,13 @@
     <div class="flex flex-col gap-6">
         <div class="flex w-full flex-col text-center">
             <flux:heading size="xl">{{ __('Forgot password') }}</flux:heading>
-            <flux:subheading>{{ __('Enter admin email to receive a password reset link') }}</flux:subheading>
+            <flux:subheading>{{ __('Enter your email to receive a password reset link') }}</flux:subheading>
         </div>
+
+        <!-- Session Status -->
+        @if (session()->has('status'))
+            <flux:callout variant="success" icon="check-circle" :heading="session('status')" />
+        @endif
 
         <form method="POST" wire:submit="sendPasswordResetLink" class="flex flex-col gap-6">
             <!-- Email Address -->

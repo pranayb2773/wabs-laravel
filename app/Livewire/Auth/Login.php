@@ -39,7 +39,7 @@ final class Login extends Component
     {
         return view('livewire.auth.login')
             ->layout('layouts.auth')
-            ->title('Admin Login');
+            ->title('Login');
     }
 
     protected function rules(): array
