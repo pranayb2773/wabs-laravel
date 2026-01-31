@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        @include('partials.head')
-    </head>
-    <body>
+<x-layouts.admin.sidebar :title="$title ?? null">
+    <flux:main>
         {{ $slot }}
-
-        @fluxScripts
-    </body>
-</html>
+    </flux:main>
+</x-layouts.admin.sidebar>

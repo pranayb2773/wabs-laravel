@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Actions\LogoutAction;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -26,3 +27,6 @@ Route::middleware('auth')->group(function () {
 Route::livewire('verify-email/{id}/{hash}', 'auth.verify-email-link')
     ->middleware(['signed', 'throttle:6,1'])
     ->name('verification.verify');
+
+Route::post('logout', [LogoutAction::class, 'handle'])
+    ->name('logout');
