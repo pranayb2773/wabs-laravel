@@ -7,12 +7,14 @@ namespace App\Livewire\Auth;
 use App\Enums\UserRole;
 use App\Enums\UserStatus;
 use App\Models\User;
+use Flux\Flux;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 final class Register extends Component
@@ -32,6 +34,33 @@ final class Register extends Component
     public bool $isProfessionalTrader = false;
 
     public bool $tosAccepted = false;
+
+    #[Computed]
+    public function canAcceptTerms(): bool
+    {
+        return $this->tosAccepted && $this->is18Plus && $this->isProfessionalTrader;
+    }
+
+    public function declineTerms(): void
+    {
+        $this->terms = false;
+        $this->tosAccepted = false;
+        $this->is18Plus = false;
+        $this->isProfessionalTrader = false;
+
+        Flux::modal('terms-of-service')->close();
+    }
+
+    public function acceptTerms(): void
+    {
+        if (! $this->canAcceptTerms) {
+            return;
+        }
+
+        $this->terms = true;
+
+        Flux::modal('terms-of-service')->close();
+    }
 
     public function register(): void
     {
@@ -70,9 +99,7 @@ final class Register extends Component
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'confirmed', Password::defaults()],
-            'is18Plus' => ['required', 'accepted'],
-            'isProfessionalTrader' => ['required', 'accepted'],
-            'tosAccepted' => ['required', 'accepted'],
+            'terms' => ['required', 'accepted'],
         ];
     }
 }
