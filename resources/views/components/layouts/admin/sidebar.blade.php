@@ -3,51 +3,66 @@
     <head>
         @include('partials.head')
     </head>
-    <body class="min-h-screen bg-zinc-50 antialiased dark:bg-zinc-900">
-        <flux:sidebar collapsible class="bg-white dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-700">
-            <flux:sidebar.header>
-                <flux:sidebar.brand
-                    href="{{ route('admin.dashboard') }}"
-                    logo="{{ asset('images/logo.svg') }}"
-                    name="Wealth Lab"
-                />
-                <flux:sidebar.collapse />
+    <body class="min-h-screen bg-white antialiased dark:bg-zinc-800">
+        <flux:sidebar
+            sticky
+            collapsible="mobile"
+            class="bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-700 px-0! py-4"
+        >
+            <flux:sidebar.header class="px-4">
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2" wire:navigate>
+                    <div class="size-8 flex items-center justify-center rounded-full bg-brand-primary text-white">
+                        <flux:icon name="sparkles" />
+                    </div>
+                    <span class="text-xl font-semibold text-zinc-800 dark:text-white">{{ config('app.name') }}</span>
+                </a>
+
+                <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
 
-            <flux:navlist variant="outline" class="mt-6">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item
+            <flux:separator />
+
+            <flux:sidebar.nav class="space-y-4 px-4">
+                <flux:sidebar.group heading="{{ __('Platform') }}" class="grid">
+                    <flux:sidebar.item
                         icon="home"
                         :href="route('admin.dashboard')"
                         :current="request()->routeIs('admin.dashboard')"
                         wire:navigate
+                        class="size-6"
                     >
                         {{ __('Dashboard') }}
-                    </flux:navlist.item>
-                </flux:navlist.group>
-            </flux:navlist>
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
 
-            <flux:spacer />
+                <flux:sidebar.group heading="{{ __('User Management') }}" class="grid">
+                    <flux:sidebar.item
+                        icon="users"
+                        :href="route('home')"
+                        :current="request()->routeIs('home')"
+                        wire:navigate
+                    >
+                        {{ __('Users') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+            </flux:sidebar.nav>
+
+            <flux:sidebar.spacer />
             <!-- Desktop User Menu -->
-            <flux:dropdown class="hidden lg:block" position="bottom" align="start">
+            <flux:dropdown class="hidden lg:block px-4" position="bottom" align="start">
                 <flux:profile
                     :name="auth()->user()->name"
                     :initials="auth()->user()->initials()"
                     icon:trailing="chevron-up-down"
+                    avatar:color="violet"
                     data-test="sidebar-menu-button"
                 />
 
-                <flux:menu class="w-[220px]">
+                <flux:menu class="w-55">
                     <flux:menu.radio.group>
                         <div class="p-0 text-sm font-normal">
                             <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
-                                <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
-                                    <span
-                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
-                                    >
-                                        {{ auth()->user()->initials() }}
-                                    </span>
-                                </span>
+                                <flux:avatar name="{{ auth()->user()->name }}" size="sm" color="violet" />
 
                                 <div class="grid flex-1 text-start text-sm leading-tight">
                                     <span class="truncate font-semibold">

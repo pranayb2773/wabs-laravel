@@ -71,6 +71,10 @@
     @apply !mb-0 !leading-tight;
 }
 
+[data-flux-sidebar-item] [data-slot="icon"] {
+    @apply size-5;
+}
+
 /* Marketing animations */
 @keyframes float {
     0%, 100% { transform: translate(0, 0) scale(1); }
