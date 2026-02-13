@@ -71,7 +71,7 @@
     @apply !mb-0 !leading-tight;
 }
 
-[data-flux-sidebar-item] [data-slot="icon"] {
+[data-flux-sidebar-item] [data-slot="icon"], [data-flux-sidebar-group-dropdown] [data-slot="icon"] {
     @apply size-5;
 }
 
