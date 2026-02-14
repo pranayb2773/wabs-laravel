@@ -20,9 +20,19 @@
                 />
             </flux:sidebar.header>
             <flux:sidebar.nav class="space-y-2">
-                <flux:sidebar.item icon="home" href="#" current>Home</flux:sidebar.item>
+                <flux:sidebar.item
+                    icon="home"
+                    href="{{ route('admin.dashboard') }}"
+                    :current="request()->routeIs('admin.dashboard')"
+                >
+                    {{ __('Dashboard') }}
+                </flux:sidebar.item>
                 <flux:sidebar.group expandable icon="users" heading="{{ __('User Management') }}" class="grid">
-                    <flux:sidebar.item :href="route('home')" :current="request()->routeIs('home')" wire:navigate>
+                    <flux:sidebar.item
+                        :href="route('admin.users')"
+                        :current="request()->routeIs('admin.users')"
+                        wire:navigate
+                    >
                         {{ __('Users') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>

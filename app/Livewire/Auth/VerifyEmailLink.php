@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Auth;
 
+use App\Enums\UserStatus;
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Livewire\Component;
@@ -19,6 +20,7 @@ final class VerifyEmailLink extends Component
         }
 
         if (! $user->hasVerifiedEmail()) {
+            $user->status = UserStatus::Active;
             $user->markEmailAsVerified();
 
             event(new Verified($user));

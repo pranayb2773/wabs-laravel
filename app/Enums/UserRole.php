@@ -7,13 +7,13 @@ namespace App\Enums;
 enum UserRole: string
 {
     case Admin = 'admin';
-    case User = 'user';
+    case Trader = 'trader';
 
     public function getLabel(): string
     {
         return match ($this) {
             self::Admin => __('Admin'),
-            self::User => __('User'),
+            self::Trader => __('Trader'),
         };
     }
 }

@@ -27,4 +27,13 @@ enum UserStatus: string
             self::Blocked => 'red',
         };
     }
+
+    public function getIcon(): string
+    {
+        return match ($this) {
+            self::Active => 'check-circle',
+            self::Pending => 'clock',
+            self::Blocked => 'x-circle',
+        };
+    }
 }

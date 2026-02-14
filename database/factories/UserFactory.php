@@ -34,11 +34,11 @@ final class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => self::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'role' => UserRole::User,
-            'status' => UserStatus::Active,
+            'role' => UserRole::Trader,
+            'status' => fake()->randomElement(UserStatus::cases()),
             'avatar' => null,
             'is_18_plus' => true,
-            'is_professional_trader' => false,
+            'is_professional_trader' => fake()->boolean(),
             'tos_accepted' => true,
         ];
     }
@@ -50,6 +50,16 @@ final class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => UserRole::Admin,
+        ]);
+    }
+
+    /**
+     * Indicate that the user's status is active.
+     */
+    public function active(): self
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => UserStatus::Active,
         ]);
     }
 

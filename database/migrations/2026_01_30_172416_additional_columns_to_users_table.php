@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('role')->default(UserRole::User)->after('password');
+            $table->string('role')->default(UserRole::Trader)->after('password');
             $table->string('status')->default(UserStatus::Pending)->after('role');
             $table->string('avatar')->nullable()->after('status');
             $table->boolean('is_18_plus')->default(true)->after('avatar');

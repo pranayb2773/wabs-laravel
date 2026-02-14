@@ -17,11 +17,15 @@ final class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->admin()->unverified()->create([
+        User::factory()->admin()->active()->create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
         ]);
 
-        User::factory(10)->create();
+        User::factory(5)->create();
+        User::factory(3)->pending()->create();
+        User::factory(2)->blocked()->create();
+        User::factory(3)->unverified()->pending()->create();
+        User::factory(2)->unverified()->create();
     }
 }

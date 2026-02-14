@@ -70,7 +70,7 @@ final class Register extends Component
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'role' => UserRole::User,
+            'role' => UserRole::Trader,
             'status' => UserStatus::Pending,
             'tos_accepted' => $this->tosAccepted,
             'is_18_plus' => $this->is18Plus,
