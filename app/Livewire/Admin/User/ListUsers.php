@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Livewire\Admin\User;
 
+use App\Enums\UserStatus;
 use App\Models\User;
+use Flux\Flux;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Sleep;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -34,12 +37,15 @@ final class ListUsers extends Component
 
     public function render(): View
     {
-        $this->userIds = $this->allUserIds();
-        $this->userIdsOnPage = $this->users->map(fn ($user) => (string) $user->id)->toArray();
-
         return view('livewire.admin.user.list-users')
             ->layout('layouts.admin')
             ->title('Users');
+    }
+
+    public function populateIds(): void
+    {
+        $this->userIds = $this->allUserIds();
+        $this->userIdsOnPage = $this->users->map(fn ($user) => (string) $user->id)->toArray();
     }
 
     public function updated(string $propertyName): void
@@ -66,9 +72,52 @@ final class ListUsers extends Component
         }
     }
 
+    public function verifyEmail(int $userId): void
+    {
+        $updated = User::query()
+            ->trader()
+            ->whereKey($userId)
+            ->update(['email_verified_at' => now()]);
+
+        if ($updated > 0) {
+            Flux::toast(text: 'Email has been verified.', heading: 'User Updated', variant: 'success');
+        }
+    }
+
+    public function unverifyEmail(int $userId): void
+    {
+        $updated = User::query()
+            ->trader()
+            ->whereKey($userId)
+            ->update(['email_verified_at' => null]);
+
+        if ($updated > 0) {
+            Flux::toast(text: 'Email has been marked as unverified.', heading: 'User Updated', variant: 'success');
+        }
+    }
+
+    public function changeStatus(int $userId, string $status): void
+    {
+        $userStatus = UserStatus::tryFrom($status);
+
+        if ($userStatus === null) {
+            return;
+        }
+
+        $updated = User::query()
+            ->trader()
+            ->whereKey($userId)
+            ->update(['status' => $userStatus->value]);
+
+        if ($updated > 0) {
+            Flux::toast(text: "Status changed to {$userStatus->getLabel()}.", heading: 'User Updated', variant: 'success');
+        }
+    }
+
     #[Computed]
     public function users(): LengthAwarePaginator
     {
+        Sleep::sleep(0.2);
         $query = User::query()->trader();
 
         $this->applySearch($query);
