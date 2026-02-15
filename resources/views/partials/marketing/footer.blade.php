@@ -23,7 +23,7 @@
                         <a href="{{ route('pricing') }}" class="text-brand-text-muted text-sm transition-colors hover:text-brand-tertiary">Pricing</a>
                     </li>
                     <li>
-                        <a href="{{ route('login') }}" class="text-brand-text-muted text-sm transition-colors hover:text-brand-tertiary">Sign In</a>
+                        <a href="{{ route('terms') }}" class="text-brand-text-muted text-sm transition-colors hover:text-brand-tertiary">Terms of Service</a>
                     </li>
                 </ul>
             </div>
@@ -57,7 +57,6 @@
         {{-- Bottom bar --}}
         <div class="mt-12 pt-6 border-t border-brand-primary/10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-brand-text-muted text-xs">&copy; {{ date('Y') }} WealthLabs.AI. All rights reserved.</p>
-            <a href="{{ route('terms') }}" class="text-brand-text-muted text-xs transition-colors hover:text-brand-tertiary">Terms of Service</a>
         </div>
     </div>
 </footer>
