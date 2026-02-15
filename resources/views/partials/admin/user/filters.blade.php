@@ -82,7 +82,7 @@
         </div>
     </div>
     <div
-        class="flex flex-col justify-between gap-y-1 bg-zinc-50 dark:bg-zinc-600/40 px-3 py-2 sm:flex-row sm:items-center sm:px-6 sm:py-1.5"
+        class="flex flex-col justify-between gap-y-1 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 sm:flex-row sm:items-center sm:px-6 sm:py-1.5 border-t border-zinc-200 dark:border-zinc-700"
         x-bind:hidden="!$wire.selectedUserIds.length"
         x-show="$wire.selectedUserIds.length"
         x-cloak

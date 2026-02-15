@@ -1,9 +1,10 @@
 <div
-    class="relative overflow-x-auto border border-collapse border-zinc-200 dark:border-zinc-800 rounded-b-xl"
+    class="relative overflow-x-auto border border-collapse border-zinc-200 dark:border-zinc-800 dark:border-t-zinc-700 rounded-b-xl"
     wire:loading.remove
     wire:target="search,filters,sortBy,gotoPage,previousPage,nextPage,setPage"
 >
     <table
+        data-flux-table
         class="[:where(&)]:min-w-full table-fixed text-zinc-800 divide-y divide-zinc-200 dark:divide-zinc-800 whitespace-nowrap [&_dialog]:whitespace-normal **:[[popover]]:whitespace-normal"
     >
         <flux:table.columns class="bg-zinc-50 dark:bg-zinc-800">
@@ -36,7 +37,7 @@
             </flux:table.column>
         </flux:table.columns>
 
-        <flux:table.rows>
+        <flux:table.rows class="bg-white dark:bg-zinc-900">
             @forelse ($this->brokers as $broker)
                 <flux:table.row :key="$broker->id">
                     <flux:table.cell class="pl-4! size-2">
@@ -51,6 +52,7 @@
                                     class="size-8 rounded-md object-cover ring-1 ring-zinc-200 dark:ring-zinc-700"
                                 />
                             @endif
+
                             <span class="font-medium">{{ $broker->name }}</span>
                         </div>
                     </flux:table.cell>

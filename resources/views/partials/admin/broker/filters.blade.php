@@ -9,7 +9,11 @@
         class="flex flex-col md:flex-row items-start md:items-center md:justify-between gap-y-4 md:gap-x-4 p-4 sm:px-6"
     >
         <div class="flex shrink-0 items-center gap-x-4">
-            <div class="flex shrink-0 items-center gap-3 justify-end" x-show="$wire.selectedBrokerIds.length" x-cloak>
+            <div
+                class="flex shrink-0 items-center gap-3 justify-end"
+                x-show="$wire.selectedBrokerIds.length"
+                x-cloak
+            >
                 <flux:dropdown position="bottom" align="start">
                     <flux:button size="sm" icon="ellipsis-horizontal" inset="top bottom">Bulk actions</flux:button>
                     <flux:menu>
@@ -78,7 +82,7 @@
     </div>
 
     <div
-        class="flex flex-col justify-between gap-y-1 bg-zinc-50 dark:bg-zinc-600/40 px-3 py-2 sm:flex-row sm:items-center sm:px-6 sm:py-1.5"
+        class="flex flex-col justify-between gap-y-1 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 sm:flex-row sm:items-center sm:px-6 sm:py-1.5 border-t border-zinc-200 dark:border-zinc-700"
         x-bind:hidden="!$wire.selectedBrokerIds.length"
         x-show="$wire.selectedBrokerIds.length"
         x-cloak
@@ -142,9 +146,7 @@
                 <flux:icon name="trash" class="size-7" />
             </div>
 
-            <flux:heading size="xl" class="mt-5 text-zinc-900 dark:text-white">
-                Delete selected brokers?
-            </flux:heading>
+            <flux:heading size="xl" class="mt-5 text-zinc-900 dark:text-white">Delete selected brokers?</flux:heading>
 
             <div class="mt-3 space-y-1 text-zinc-600 dark:text-zinc-400">
                 <p class="text-base leading-tight">Are you sure you would like to do this?</p>
