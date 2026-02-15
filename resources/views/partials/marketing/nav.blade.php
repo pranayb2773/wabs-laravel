@@ -16,14 +16,8 @@
             Features
         </a>
         <a
-            href="#tools"
-            class="text-brand-text-secondary text-sm font-medium tracking-wide transition-colors hover:text-brand-tertiary"
-        >
-            Tools
-        </a>
-        <a
-            href="#pricing"
-            class="text-brand-text-secondary text-sm font-medium tracking-wide transition-colors hover:text-brand-tertiary"
+            href="{{ route('pricing') }}"
+            class="text-sm font-medium tracking-wide transition-colors hover:text-brand-tertiary {{ request()->routeIs('pricing') ? 'text-brand-tertiary' : 'text-brand-text-secondary' }}"
         >
             Pricing
         </a>
@@ -96,16 +90,9 @@
                 Features
             </a>
             <a
-                href="#tools"
+                href="{{ route('pricing') }}"
                 @click="open = false"
-                class="text-brand-text-secondary text-base font-medium py-2 transition-colors hover:text-brand-tertiary"
-            >
-                Tools
-            </a>
-            <a
-                href="#pricing"
-                @click="open = false"
-                class="text-brand-text-secondary text-base font-medium py-2 transition-colors hover:text-brand-tertiary"
+                class="text-base font-medium py-2 transition-colors hover:text-brand-tertiary {{ request()->routeIs('pricing') ? 'text-brand-tertiary' : 'text-brand-text-secondary' }}"
             >
                 Pricing
             </a>

@@ -155,6 +155,7 @@
                                             size="sm"
                                             icon="{{ $user->email_verified_at ? 'x-circle' : 'check-circle' }}"
                                             wire:click="{{ $user->email_verified_at ? 'unverifyEmail' : 'verifyEmail' }}({{ $user->id }})"
+                                            x-on:click="$el.closest('[popover]')?.hidePopover()"
                                         >
                                             {{ $user->email_verified_at ? 'Unverify' : 'Verify' }}
                                         </flux:button>
@@ -166,6 +167,7 @@
                                                     :color="$statusOption->getColor()"
                                                     icon="{{ $statusOption->getIcon() }}"
                                                     wire:click="changeStatus({{ $user->id }}, '{{ $statusOption->value }}')"
+                                                    x-on:click="$el.closest('[popover]')?.hidePopover()"
                                                 >
                                                     {{ $statusOption->getLabel() }}
                                                 </flux:button>

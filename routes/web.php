@@ -12,6 +12,14 @@ Route::get('/features', function () {
     return view('features');
 })->name('features');
 
+Route::get('/pricing', function () {
+    return view('pricing');
+})->name('pricing');
+
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::livewire('/dashboard', 'app.dashboard')
         ->name('dashboard');
