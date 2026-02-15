@@ -114,6 +114,33 @@ final class ListUsers extends Component
         }
     }
 
+    public function deleteSelectedUsers(): void
+    {
+        if ($this->selectedUserIds === []) {
+            Flux::modal('delete-users-bulk')->close();
+
+            return;
+        }
+
+        $deletedCount = User::query()
+            ->trader()
+            ->whereIn('id', $this->selectedUserIds)
+            ->delete();
+
+        $this->reset(['selectedUserIds', 'userIdsOnPage']);
+        $this->resetPage();
+
+        Flux::modal('delete-users-bulk')->close();
+
+        if ($deletedCount > 0) {
+            Flux::toast(
+                text: "{$deletedCount} user(s) deleted successfully.",
+                heading: 'Users Deleted',
+                variant: 'success'
+            );
+        }
+    }
+
     #[Computed]
     public function users(): LengthAwarePaginator
     {

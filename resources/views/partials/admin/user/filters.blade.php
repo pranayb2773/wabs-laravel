@@ -13,7 +13,7 @@
                 <flux:dropdown position="bottom" align="start">
                     <flux:button size="sm" icon="ellipsis-horizontal" inset="top bottom">Bulk actions</flux:button>
                     <flux:menu>
-                        <flux:modal.trigger name="delete-applications-bulk">
+                        <flux:modal.trigger name="delete-users-bulk">
                             <flux:menu.item icon="trash" variant="danger">Delete selected</flux:menu.item>
                         </flux:modal.trigger>
                     </flux:menu>
@@ -27,7 +27,6 @@
                 size="sm"
                 placeholder="Search users"
                 :clearable="true"
-                data-dim-filter
             />
             <flux:dropdown>
                 <flux:button icon="funnel" size="sm" icon:class="text-zinc-400">
@@ -45,7 +44,6 @@
                         size="sm"
                         label="Status"
                         placeholder="Choose status..."
-                        data-dim-filter
                     >
                         @foreach (UserStatus::cases() as $status)
                             <flux:select.option :value="$status">
@@ -66,7 +64,6 @@
                         size="sm"
                         label="Email status"
                         placeholder="Choose email status..."
-                        data-dim-filter
                     >
                         <flux:select.option value="verified">Verified</flux:select.option>
                         <flux:select.option value="unverified">Unverified</flux:select.option>
@@ -77,7 +74,6 @@
                         size="sm"
                         class="justify-center -m-2 px-2!"
                         wire:click="$set('filters', [])"
-                        data-dim-filter
                     >
                         Clear all
                     </flux:button>
@@ -125,3 +121,62 @@
         </div>
     </div>
 </div>
+
+<flux:modal
+    name="delete-users-bulk"
+    class="md:w-2xl rounded-2xl border border-zinc-200 bg-white text-zinc-900 shadow-2xl dark:border-zinc-700 dark:bg-zinc-900/95 dark:text-white"
+    :dismissible="false"
+    :closeable="false"
+    variant="bare"
+>
+    <div class="relative px-6 py-7 md:px-8">
+        <flux:modal.close>
+            <button
+                type="button"
+                class="absolute right-6 top-6 inline-flex size-8 items-center justify-center rounded-md text-zinc-400 transition hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+            >
+                <flux:icon name="x-mark" variant="mini" />
+            </button>
+        </flux:modal.close>
+
+        <div class="mx-auto max-w-xl text-center">
+            <div
+                class="mx-auto inline-flex size-16 items-center justify-center rounded-full bg-red-100 text-red-600 ring-1 ring-red-200 dark:bg-red-900/30 dark:text-red-500 dark:ring-red-900/40"
+            >
+                <flux:icon name="trash" class="size-7" />
+            </div>
+
+            <flux:heading size="xl" class="mt-5 text-zinc-900 dark:text-white">Delete selected users?</flux:heading>
+
+            <div class="mt-3 space-y-1 text-zinc-600 dark:text-zinc-400">
+                <p class="text-base leading-tight">Are you sure you would like to do this?</p>
+                <p class="text-base leading-tight">This action cannot be reversed.</p>
+            </div>
+
+            <div
+                class="mt-4 inline-flex items-center gap-3 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800/70"
+            >
+                <span class="text-zinc-600 dark:text-zinc-400">Selected users</span>
+                <span
+                    class="inline-flex min-w-8 items-center justify-center rounded-full bg-red-100 px-2 py-0.5 font-semibold text-red-700 dark:bg-red-500/20 dark:text-red-300"
+                    x-text="$wire.selectedUserIds.length"
+                ></span>
+            </div>
+
+            <div class="mt-6 grid grid-cols-2 gap-3">
+                <flux:modal.close>
+                    <flux:button class="h-11 w-full text-base" variant="filled" color="zinc">Cancel</flux:button>
+                </flux:modal.close>
+                <flux:button
+                    class="h-11 w-full text-base"
+                    variant="danger"
+                    wire:click="deleteSelectedUsers"
+                    wire:loading.attr="disabled"
+                    wire:target="deleteSelectedUsers"
+                >
+                    Delete
+                </flux:button>
+            </div>
+        </div>
+    </div>
+</flux:modal>
