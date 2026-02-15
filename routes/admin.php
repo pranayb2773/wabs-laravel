@@ -10,4 +10,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
     Route::livewire('/admin/users', 'admin.user.list-users')
         ->name('admin.users');
+
+    Route::livewire('/admin/brokers', 'admin.broker.list-brokers')
+        ->name('admin.brokers');
 });

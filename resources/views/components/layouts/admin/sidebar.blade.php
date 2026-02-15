@@ -36,6 +36,14 @@
                         {{ __('Users') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
+                <flux:sidebar.item
+                    icon="banknotes"
+                    :href="route('admin.brokers')"
+                    :current="request()->routeIs('admin.brokers')"
+                    wire:navigate
+                >
+                    {{ __('Brokers') }}
+                </flux:sidebar.item>
             </flux:sidebar.nav>
             <flux:sidebar.spacer />
             <flux:sidebar.nav>
