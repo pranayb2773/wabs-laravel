@@ -21,7 +21,7 @@
             </flux:sidebar.header>
             <flux:sidebar.nav class="space-y-2">
                 <flux:sidebar.item
-                    icon="home"
+                    icon="squares-2x2"
                     href="{{ route('admin.dashboard') }}"
                     :current="request()->routeIs('admin.dashboard')"
                 >
@@ -37,7 +37,7 @@
                     </flux:sidebar.item>
                 </flux:sidebar.group>
                 <flux:sidebar.item
-                    icon="banknotes"
+                    icon="building-library"
                     :href="route('admin.brokers')"
                     :current="request()->routeIs('admin.brokers')"
                     wire:navigate
