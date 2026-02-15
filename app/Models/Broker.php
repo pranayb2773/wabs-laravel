@@ -18,4 +18,15 @@ final class Broker extends Model
     {
         return $this->hasMany(BrokerType::class);
     }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'is_file_upload' => 'boolean',
+            'is_auto_sync' => 'boolean',
+        ];
+    }
 }

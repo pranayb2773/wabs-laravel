@@ -8,7 +8,7 @@
         class="[:where(&)]:min-w-full table-fixed text-zinc-800 divide-y divide-zinc-200 dark:divide-zinc-800 whitespace-nowrap [&_dialog]:whitespace-normal **:[[popover]]:whitespace-normal"
     >
         <flux:table.columns class="bg-zinc-50 dark:bg-zinc-800">
-            <flux:table.column class="pl-4!">
+            <flux:table.column class="pl-4! w-12">
                 <div>
                     <flux:checkbox
                         x-ref="checkbox"
@@ -18,6 +18,7 @@
                 </div>
             </flux:table.column>
             <flux:table.column
+                class="w-72"
                 sortable
                 :sorted="$sortCol === 'name'"
                 :direction="$sortDirection"
@@ -25,9 +26,11 @@
             >
                 Name
             </flux:table.column>
-            <flux:table.column>Types</flux:table.column>
-            <flux:table.column>Description</flux:table.column>
+            <flux:table.column class="w-96">Types</flux:table.column>
+            <flux:table.column>File Upload</flux:table.column>
+            <flux:table.column>Auto Sync</flux:table.column>
             <flux:table.column
+                class="w-36"
                 sortable
                 :sorted="$sortCol === 'updated_at'"
                 :direction="$sortDirection"
@@ -46,10 +49,18 @@
                     <flux:table.cell>
                         <div class="flex items-center gap-3">
                             @if ($broker->logo)
+                                @php
+                                    $normalizedBrokerName = str($broker->name)->lower()->value();
+                                    $logoBackgroundClass = str_contains($normalizedBrokerName, 'webull')
+                                        ? 'bg-blue-600 ring-blue-200 dark:bg-blue-700 dark:ring-blue-500'
+                                        : (str_contains($normalizedBrokerName, 'fidelity')
+                                            ? 'bg-green-600 ring-green-200 dark:bg-green-700 dark:ring-green-500'
+                                            : 'bg-white ring-zinc-200 dark:bg-zinc-700 dark:ring-zinc-600');
+                                @endphp
                                 <img
-                                    src="{{ $broker->logo }}"
+                                    src="{{ asset($broker->logo) }}"
                                     alt="{{ $broker->name }}"
-                                    class="size-8 rounded-md object-cover ring-1 ring-zinc-200 dark:ring-zinc-700"
+                                    class="size-8 rounded-md object-contain p-1 ring-1 shadow-xs dark:shadow-none {{ $logoBackgroundClass }}"
                                 />
                             @endif
 
@@ -69,14 +80,29 @@
                             @endforeach
                         </div>
                     </flux:table.cell>
-                    <flux:table.cell class="text-zinc-600 dark:text-zinc-400">
-                        {{ str($broker->description)->limit(80) }}
+                    <flux:table.cell>
+                        <flux:badge
+                            size="sm"
+                            :color="$broker->is_file_upload ? 'green' : 'zinc'"
+                            :icon="$broker->is_file_upload ? 'check' : 'x-mark'"
+                        >
+                            {{ $broker->is_file_upload ? 'Yes' : 'No' }}
+                        </flux:badge>
+                    </flux:table.cell>
+                    <flux:table.cell>
+                        <flux:badge
+                            size="sm"
+                            :color="$broker->is_auto_sync ? 'green' : 'zinc'"
+                            :icon="$broker->is_auto_sync ? 'check' : 'x-mark'"
+                        >
+                            {{ $broker->is_auto_sync ? 'Yes' : 'No' }}
+                        </flux:badge>
                     </flux:table.cell>
                     <flux:table.cell>{{ $broker->updated_at?->diffForHumans() }}</flux:table.cell>
                 </flux:table.row>
             @empty
                 <flux:table.row>
-                    <flux:table.cell colspan="5" class="text-center py-4">
+                    <flux:table.cell colspan="7" class="text-center py-4">
                         <div
                             class="flex flex-col items-center justify-center space-y-2 text-zinc-500 dark:text-zinc-400"
                         >
@@ -105,19 +131,22 @@
         <table class="w-full table-fixed">
             <thead class="bg-zinc-50 dark:bg-zinc-800">
                 <tr>
-                    <th class="p-3 w-10">
+                    <th class="p-3 w-12">
                         <flux:skeleton class="size-4 rounded" />
                     </th>
-                    <th class="p-3">
+                    <th class="p-3 w-72">
                         <flux:skeleton.line class="w-18" />
                     </th>
-                    <th class="p-3">
+                    <th class="p-3 w-64">
                         <flux:skeleton.line class="w-14" />
                     </th>
                     <th class="p-3">
-                        <flux:skeleton.line class="w-24" />
+                        <flux:skeleton.line class="w-16" />
                     </th>
                     <th class="p-3">
+                        <flux:skeleton.line class="w-16" />
+                    </th>
+                    <th class="p-3 w-36">
                         <flux:skeleton.line class="w-20" />
                     </th>
                 </tr>
@@ -135,7 +164,10 @@
                             <flux:skeleton class="h-5 w-24 rounded-full" />
                         </td>
                         <td class="p-3">
-                            <flux:skeleton.line style="width: {{ rand(60, 100) }}%" />
+                            <flux:skeleton class="h-5 w-12 rounded-full" />
+                        </td>
+                        <td class="p-3">
+                            <flux:skeleton class="h-5 w-12 rounded-full" />
                         </td>
                         <td class="p-3">
                             <flux:skeleton.line style="width: {{ rand(40, 70) }}%" />

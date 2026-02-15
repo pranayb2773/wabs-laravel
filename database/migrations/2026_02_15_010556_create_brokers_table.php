@@ -15,6 +15,8 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('logo')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('is_file_upload')->default(false);
+            $table->boolean('is_auto_sync')->default(false);
             $table->timestamps();
         });
     }

@@ -23,6 +23,8 @@ final class BrokerFactory extends Factory
             'name' => fake()->company(),
             'logo' => fake()->imageUrl(256, 256, 'business', true, 'broker'),
             'description' => fake()->paragraph(),
+            'is_file_upload' => fake()->boolean(),
+            'is_auto_sync' => fake()->boolean(),
         ];
     }
 }

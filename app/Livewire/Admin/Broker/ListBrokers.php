@@ -144,6 +144,14 @@ final class ListBrokers extends Component
                 $typeQuery->where('type', $brokerType->value);
             });
         });
+
+        $query->when($this->filters['file_upload'] ?? null, function (Builder $query, string $value): void {
+            $query->where('is_file_upload', $value === 'yes');
+        });
+
+        $query->when($this->filters['auto_sync'] ?? null, function (Builder $query, string $value): void {
+            $query->where('is_auto_sync', $value === 'yes');
+        });
     }
 
     protected function applySorting(Builder $query): void

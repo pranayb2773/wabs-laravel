@@ -22,6 +22,7 @@
                 </div>
             </flux:table.column>
             <flux:table.column
+                class="w-72"
                 sortable
                 :sorted="$sortCol === 'name'"
                 :direction="$sortDirection"
@@ -30,6 +31,7 @@
                 Name
             </flux:table.column>
             <flux:table.column
+                class="w-80"
                 sortable
                 :sorted="$sortCol === 'email'"
                 :direction="$sortDirection"

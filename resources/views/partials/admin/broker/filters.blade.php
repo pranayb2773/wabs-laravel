@@ -66,6 +66,28 @@
                         @endforeach
                     </flux:select>
 
+                    <flux:select
+                        wire:model.live="filters.file_upload"
+                        variant="listbox"
+                        size="sm"
+                        label="File Upload"
+                        placeholder="Choose file upload status..."
+                    >
+                        <flux:select.option value="yes">Yes</flux:select.option>
+                        <flux:select.option value="no">No</flux:select.option>
+                    </flux:select>
+
+                    <flux:select
+                        wire:model.live="filters.auto_sync"
+                        variant="listbox"
+                        size="sm"
+                        label="Auto Sync"
+                        placeholder="Choose auto sync status..."
+                    >
+                        <flux:select.option value="yes">Yes</flux:select.option>
+                        <flux:select.option value="no">No</flux:select.option>
+                    </flux:select>
+
                     <flux:separator variant="subtle" />
 
                     <flux:button
