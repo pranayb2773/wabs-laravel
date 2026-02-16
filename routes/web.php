@@ -20,6 +20,8 @@ Route::get('/terms', function () {
     return view('terms');
 })->name('terms');
 
+Route::livewire('/supported-broker', 'guest.broker-support')->name('supported-broker');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::livewire('/dashboard', 'app.dashboard')
         ->name('dashboard');

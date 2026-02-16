@@ -23,6 +23,9 @@
                         <a href="{{ route('pricing') }}" class="text-brand-text-muted text-sm transition-colors hover:text-brand-tertiary">Pricing</a>
                     </li>
                     <li>
+                        <a href="{{ route('supported-broker') }}" class="text-brand-text-muted text-sm transition-colors hover:text-brand-tertiary">Supported Broker</a>
+                    </li>
+                    <li>
                         <a href="{{ route('terms') }}" class="text-brand-text-muted text-sm transition-colors hover:text-brand-tertiary">Terms of Service</a>
                     </li>
                 </ul>
