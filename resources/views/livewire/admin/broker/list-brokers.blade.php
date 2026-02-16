@@ -11,16 +11,19 @@
         <!-- Page Heading -->
         <div class="flex items-center justify-between">
             <flux:heading size="xl">{{ __('Brokers') }}</flux:heading>
+            <flux:modal.trigger name="create-broker">
+                <flux:button variant="primary" size="sm" icon="plus">Create Broker</flux:button>
+            </flux:modal.trigger>
         </div>
 
+        <livewire:admin.broker.create-broker />
+
         <!-- Filters and Table -->
-        @island(defer: true)
+        @island(name: 'brokers-table', defer: true, always: true)
             @placeholder
                 <div>
                     {{-- Table rows skeleton --}}
-                    <div
-                        class="border border-collapse border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden"
-                    >
+                    <div class="border border-collapse border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden">
                         <flux:skeleton.group animate="shimmer">
                             <table class="min-w-full table-fixed">
                                 <thead class="bg-zinc-50 dark:bg-zinc-800">

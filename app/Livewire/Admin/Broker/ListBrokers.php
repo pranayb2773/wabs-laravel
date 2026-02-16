@@ -35,6 +35,11 @@ final class ListBrokers extends Component
 
     public string $sortDirection = 'asc';
 
+    protected $listeners = [
+        'broker-updated' => '$refresh',
+        'broker-created' => '$refresh',
+    ];
+
     public function render(): View
     {
         return view('livewire.admin.broker.list-brokers')
@@ -93,6 +98,28 @@ final class ListBrokers extends Component
             Flux::toast(
                 text: "{$deletedCount} broker(s) deleted successfully.",
                 heading: 'Brokers Deleted',
+                variant: 'success'
+            );
+        }
+    }
+
+    public function deleteBroker(int $brokerId): void
+    {
+        $deleted = Broker::query()
+            ->whereKey($brokerId)
+            ->delete();
+
+        Flux::modal("delete-broker-{$brokerId}")->close();
+
+        if ($deleted > 0) {
+            $this->selectedBrokerIds = array_values(array_filter(
+                $this->selectedBrokerIds,
+                fn (string $selectedId): bool => (int) $selectedId !== $brokerId
+            ));
+
+            Flux::toast(
+                text: 'Broker deleted successfully.',
+                heading: 'Broker Deleted',
                 variant: 'success'
             );
         }

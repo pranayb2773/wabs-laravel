@@ -369,10 +369,13 @@
                             <div class="flex items-start justify-between gap-3">
                                 <div class="flex min-w-0 items-start gap-3">
                                     @if ($broker->logo)
+                                        @php($normalizedBrokerName = str($broker->name)->lower()->value())
+                                        @php($logoBackgroundClass = str_contains($normalizedBrokerName, 'webull') ? 'bg-blue-600 ring-blue-200 dark:bg-blue-700 dark:ring-blue-500' : (str_contains($normalizedBrokerName, 'fidelity') ? 'bg-green-600 ring-green-200 dark:bg-green-700 dark:ring-green-500' : 'bg-white ring-zinc-200 dark:bg-zinc-700 dark:ring-zinc-600'))
+
                                         <img
-                                            src="{{ $broker->logo }}"
+                                            src="{{ asset($broker->logo) }}"
                                             alt="{{ $broker->name }}"
-                                            class="size-10 rounded-lg object-cover ring-1 ring-zinc-200 dark:ring-zinc-700"
+                                            class="size-10 rounded-lg object-contain p-1 ring-1 shadow-xs dark:shadow-none {{ $logoBackgroundClass }}"
                                         />
                                     @else
                                         <div class="grid size-10 place-items-center rounded-lg bg-zinc-100 text-zinc-600 ring-1 ring-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:ring-zinc-700">
